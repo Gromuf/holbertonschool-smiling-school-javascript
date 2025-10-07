@@ -911,6 +911,66 @@
   margin: 50px auto;
 }
 
+#popular-loader {
+  display: none;
+}
+
+/* === POPULAR CAROUSEL CLEAN === */
+#popular-track {
+  display: flex;
+  flex-wrap: nowrap;
+  transition: transform 0.6s ease;
+}
+
+#popular-track .col-lg-3 {
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+/* --- Flèches à l’extérieur et centrées --- */
+.arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 20;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.arrow-btn:hover {
+  opacity: 1;
+}
+
+.arrow-btn img {
+  width: 40px;
+  height: auto;
+}
+
+/* Position à l’extérieur du carousel */
+.arrow-btn.prev {
+  left: -60px;
+}
+.arrow-btn.next {
+  right: -60px;
+}
+
+/* En responsive : rapprochement */
+@media (max-width: 991px) {
+  .arrow-btn.prev {
+    left: 0;
+  }
+  .arrow-btn.next {
+    right: 0;
+  }
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
