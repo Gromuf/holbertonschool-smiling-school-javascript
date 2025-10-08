@@ -38,10 +38,12 @@ $(document).ready(function () {
     });
   }
 
-  const loader = $("#popular-loader");
-  const track = $("#popular-track");
+  function initVideoCarousel(loaderId, trackId, prevBtnId, nextBtnId, apiUrl) {
+    const loader = $(loaderId);
+    const track = $(trackId);
 
-  if (track.length) {
+    if (!track.length) return;
+
     loader.show();
 
     function createCard(video) {
@@ -75,11 +77,10 @@ $(document).ready(function () {
     }
 
     $.ajax({
-      url: "https://smileschool-api.hbtn.info/popular-tutorials",
+      url: apiUrl,
       method: "GET",
       success: function (data) {
         loader.hide();
-
         data.forEach((video) => track.append(createCard(video)));
         data.slice(0, 4).forEach((video) => track.append(createCard(video)));
 
@@ -94,12 +95,12 @@ $(document).ready(function () {
 
         let autoSlide = setInterval(() => move(1), 4000);
 
-        $("#slideNext").click(() => {
+        $(nextBtnId).click(() => {
           clearInterval(autoSlide);
           move(1);
         });
 
-        $("#slidePrev").click(() => {
+        $(prevBtnId).click(() => {
           clearInterval(autoSlide);
           move(-1);
         });
@@ -107,9 +108,25 @@ $(document).ready(function () {
       error: function () {
         loader.hide();
         track.html(
-          '<p class="text-center text-danger w-100">Failed to load tutorials</p>'
+          '<p class="text-center text-danger w-100">Failed to load videos 😢</p>'
         );
       },
     });
   }
+
+  initVideoCarousel(
+    "#popular-loader",
+    "#popular-track",
+    "#slidePrev",
+    "#slideNext",
+    "https://smileschool-api.hbtn.info/popular-tutorials"
+  );
+
+  initVideoCarousel(
+    "#latest-loader",
+    "#latest-track",
+    "#latestPrev",
+    "#latestNext",
+    "https://smileschool-api.hbtn.info/latest-videos"
+  );
 });

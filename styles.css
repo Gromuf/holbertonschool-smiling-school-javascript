@@ -915,6 +915,15 @@
   display: none;
 }
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 /* === POPULAR CAROUSEL CLEAN === */
 #popular-track {
   display: flex;
@@ -939,7 +948,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 20;
+  z-index: 9999;
   opacity: 0.9;
   transition: opacity 0.3s ease;
 }
@@ -953,29 +962,24 @@
   height: auto;
 }
 
-/* Position à l’extérieur du carousel */
+.position-relative {
+  overflow: visible;
+}
+
 .arrow-btn.prev {
-  left: -60px;
+  left: -50px;
 }
+
 .arrow-btn.next {
-  right: -60px;
+  right: -50px;
 }
 
-/* En responsive : rapprochement */
-@media (max-width: 991px) {
-  .arrow-btn.prev {
-    left: 0;
-  }
-  .arrow-btn.next {
-    right: 0;
-  }
+@media screen and (max-width: 1280px) {
+  :root { --popular-arrows-x: -40px; }
 }
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+@media screen and (max-width: 991px) {
+  :root { --popular-arrows-x: -20px; }
+}
+@media screen and (max-width: 575px) {
+  :root { --popular-arrows-x: -10px; }
 }
